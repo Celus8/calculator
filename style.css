@@ -10,7 +10,7 @@ body {
     flex-direction: column;
 }
 
-#output {
+#display {
     background-color: rgb(207, 207, 207);
 }
 
