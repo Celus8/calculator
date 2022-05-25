@@ -2,4 +2,36 @@ body {
     display: flex;
     flex-direction: column;
     gap: 16px;
+    align-items: center;
+}
+
+#interface {
+    display: flex;
+    flex-direction: column;
+}
+
+#output {
+    background-color: rgb(207, 207, 207);
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+}
+
+.number, .operator {
+    height: 32px;
+    width: 40px;
+    border: solid black 1px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.number {
+    background-color: greenyellow;
+}
+
+.operator {
+    background-color: yellow;
 }
