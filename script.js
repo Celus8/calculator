@@ -1,98 +1,85 @@
+let display = document.querySelector("#display");
 let numbers = document.querySelectorAll(".number")
 let operators = document.querySelectorAll(".operator");
-
-let firstNumber;
-let secondNumber;
-let operation;
-let firstClicked = false;
-let operatorClicked = false;
-let secondClicked = false;
-
+let equal = document.querySelector("#equal");
+let clear = document.querySelector("#clear");
 
 numbers.forEach((currentValue) => {
 
     currentValue.addEventListener("click", () => {
-
-        if (!firstClicked) {
-            firstNumber = +currentValue.textContent;
-            firstClicked = true;
-            display.textContent = firstNumber;    
-        } else if (operatorClicked && !secondClicked) {
-            secondNumber = +currentValue.textContent;
-            secondClicked = true;
-            display.textContent += secondNumber;    
+        
+        let output = display.textContent;
+        if (!(isNaN(output.charAt(output.length - 1)))) {
+            output += currentValue.textContent;
+        } else {
+            output += " " + currentValue.textContent;
         }
+        display.textContent = output;
     })
 });
 
 operators.forEach((currentValue) => {
     currentValue.addEventListener("click", () => {
 
-        if (firstClicked && !operatorClicked) {
-            switch(currentValue.textContent) {
-                case "+":
-                    operation = add;
-                    display.textContent += currentValue.textContent;    
-                    break;
-                case "-":
-                    operation = substract;
-                    display.textContent += currentValue.textContent;  
-                    break;
-                case "x":
-                    operation = multiply;
-                    display.textContent += currentValue.textContent;  
-                    break;
-                case "/":
-                    operation = divide;
-                    display.textContent += currentValue.textContent;  
-                    break;
-                default:
-                    break;
-            
-            }
-            operatorClicked = true;
-        } else if (secondClicked && currentValue.textContent === "=") {
-            operate(operation, firstNumber,secondNumber);
-            firstClicked = false;
-            operatorClicked = false;
-            secondClicked = false;
-        } else if (currentValue.textContent === "Clear") {
-            display.textContent = "..";
-            firstClicked = false;
-            operatorClicked = false;
-            secondClicked = false;
+        let output = display.textContent;
+        if (!(isNaN(output.charAt(output.length - 1)))) {
+            output += " " + currentValue.textContent;
         }
+        display.textContent = output;
 
     })
 })
 
+equal.addEventListener("click", () => {
 
+    let output = display.textContent.split(" ");
 
+    operate(output, "/", divide);
+    operate(output, "x", multiply);
+    operate(output, "-", substract);
+    operate(output, "+", add);
 
+    
+        display.textContent = output.join(" ");
+        if (display.textContent.includes("NaN")) {
+            display.textContent = "Singularity!";
+        }
 
+})
 
-let display = document.querySelector("#display");
+function operate(output, operator, operatorFunction) {
+    output.forEach((currentValue) => {
+        if (currentValue === operator) {
+            let divIndex = output.indexOf(operator);
+        if (divIndex !== -1) {
+        output[divIndex] = operatorFunction(output[divIndex -1], output[divIndex +1]);
+        output.splice(divIndex - 1, 1);
+        output.splice(divIndex, 1);
+        }
+        }
+    })
+}
+
+clear.addEventListener("click", () => {
+    display.textContent = "";
+})
 
 function add(x, y) {
-    display.textContent = x+y;
+    return +x+ +y;
 }
 
 function substract(x, y) {
-    display.textContent = x-y;
+    return x-y;
 }
 
 function multiply(x, y) {
-    display.textContent = x*y;
+    return x*y;
 }
 
 function divide(x, y) {
-    if (y === 0) {
-        display.textContent = "Singularity!"
+    if (y == 0) {
+        return "Singularity!"
     } else {
-        display.textContent = x/y;
+        return x/y;
     }
-}
-
-function operate(operator, x, y) {
-    operator(x,y);
 }

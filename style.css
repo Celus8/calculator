@@ -12,6 +12,7 @@ body {
 
 #display {
     background-color: rgb(207, 207, 207);
+    height: 1em;
 }
 
 .row {
@@ -19,7 +20,7 @@ body {
     flex-direction: row;
 }
 
-.number, .operator {
+.number, .operator, #equal, #clear {
     height: 32px;
     width: 40px;
     border: solid black 1px;
@@ -32,6 +33,6 @@ body {
     background-color: greenyellow;
 }
 
-.operator {
+.operator, #equal, #clear {
     background-color: yellow;
 }
