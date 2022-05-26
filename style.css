@@ -13,8 +13,13 @@ body {
 
 #display {
     background-color: rgb(207, 207, 207);
-    height: 16px;
-    width: 169px;
+    padding-left: 20px;
+    font-size: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    height: 48px;
+    width: 310px;
 }
 
 .row {
@@ -23,8 +28,9 @@ body {
 }
 
 .number, .operator, #equal, #clear {
-    height: 32px;
-    width: 40px;
+    height: 64px;
+    width: 80px;
+    font-size: 28px;
     border: solid black 1px;
     display: flex;
     justify-content: center;
