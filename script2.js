@@ -1,3 +1,5 @@
+// two digit operation version
+
 let numbers = document.querySelectorAll(".number")
 let operators = document.querySelectorAll(".operator");
 

@@ -8,11 +8,13 @@ body {
 #interface {
     display: flex;
     flex-direction: column;
+    align-items: center;
 }
 
 #display {
     background-color: rgb(207, 207, 207);
-    height: 1em;
+    height: 16px;
+    width: 169px;
 }
 
 .row {

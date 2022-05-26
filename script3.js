@@ -1,4 +1,4 @@
-// TOP version
+// long operation version
 
 let display = document.querySelector("#display");
 let numbers = document.querySelectorAll(".number")
@@ -38,12 +38,11 @@ operators.forEach((currentValue) => {
         
         let outputArr = display.textContent.split(" ");
 
-        if (outputArr.length >= 3) equaling();
-
         if (outputArr.length === 1 && display.textContent !== "Singularity!") {
             equaled = false;
         }
 
+        if (equaled) return;
         let output = display.textContent;
         if (!(isNaN(output.charAt(output.length - 1))) && output !== "") {
             output += " " + currentValue.textContent;
@@ -53,7 +52,7 @@ operators.forEach((currentValue) => {
     })
 })
 
-function equaling() {
+equal.addEventListener("click", () => {
 
     let output = display.textContent.split(" ");
 
@@ -99,18 +98,12 @@ function equaling() {
     
         display.textContent = output.join(" ");
         if (display.textContent.includes("NaN")) {
-            console.log("bonkers");
             display.textContent = "Singularity!";
-        }
-        if (display.textContent.length > 10 && display.textContent !== "Singularity!") {
-            display.textContent = Math.floor(display.textContent * 1000000) / 1000000;
         }
 
     equaled = true;
 
-}
-
-equal.addEventListener("click", equaling)
+})
 
 function operate(output, operator, operatorFunction) {
     output.forEach((currentValue) => {
